@@ -1,0 +1,28 @@
+tunnel: snelapi-tunnel
+credentials-file: /root/.cloudflared/c13b43e4-950c-4a35-8ada-6bf094b5df87.json
+
+ingress:
+  - hostname: dashboard.snelapi.nl
+    service: https://192.168.86.60:32443
+    originRequest:
+      noTLSVerify: true
+
+  - hostname: api.snelapi.nl
+    service: http://normalizer-service.default:80
+
+  - hostname: www.snelapi.nl
+    service: http://snelapi-site-service.website-production:80
+
+  - hostname: explorer.snelapi.nl
+    service: http://snelapi-site-service.website-production:80
+  
+  - hostname: portal.snelapi.nl
+    service: http://snelapi-site-service.website-production:80
+
+  - hostname: docs.snelapi.nl
+    service: http://snelapi-site-service.website-production:80
+    
+  - hostname: status.snelapi.nl
+    service: https://your-status-page.betterstack.com # <-- IMPORTANT: Replace with your actual Better Stack URL
+
+  - service: http_status:404
