@@ -1,0 +1,87 @@
+# Ingress for the main website (www.snelapi.nl)
+# This rule is simple and forwards all traffic to the root.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: snelapi-site-ingress-www
+  namespace: website-production
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: www.snelapi.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: snelapi-site-service
+                port:
+                  number: 80
+---
+# Ingress for the API Explorer
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: snelapi-site-ingress-explorer
+  namespace: website-production
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /explorer/$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: explorer.snelapi.nl
+      http:
+        paths:
+          - path: /()(.*)
+            # Use ImplementationSpecific for regex paths
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: snelapi-site-service
+                port:
+                  number: 80
+---
+# Ingress for the Portal
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: snelapi-site-ingress-portal
+  namespace: website-production
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /portal/$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: portal.snelapi.nl
+      http:
+        paths:
+          - path: /()(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: snelapi-site-service
+                port:
+                  number: 80
+---
+# Ingress for the Docs (documentation page)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: snelapi-site-ingress-docs
+  namespace: website-production
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /docs/$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: docs.snelapi.nl
+      http:
+        paths:
+          - path: /()(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: snelapi-site-service
+                port:
+                  number: 80

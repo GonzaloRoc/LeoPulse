@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: normalizer-service
+  namespace: default
+spec:
+  selector:
+    app: normalizer-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080 # Corrected to match the container's port
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: normalizer-api
+  namespace: default # Added for best practice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: normalizer-api
+  template:
+    metadata:
+      labels:
+        app: normalizer-api
+    spec:
+      # --- 1. DEFINE THE VOLUME USING THE PVC ---
+      # This section tells the deployment about the storage we want to use.
+      volumes:
+        - name: api-logs-storage
+          persistentVolumeClaim:
+            claimName: api-logs-pvc # This MUST match the name in api-logs-pvc.yaml
+
+      containers:
+        - name: normalizer-api
+          # --- UPDATED IMAGE TAG ---
+          # Use a new tag to force a pull of the latest code.
+          image: registryiotc02.azurecr.io/lp-fastapi:v1.0.9
+          ports:
+            - containerPort: 8080 # Corrected to match your app's port
+
+          # --- 2. MOUNT THE VOLUME INTO THE CONTAINER ---
+          # This makes the shared storage available inside the container at /data
+          volumeMounts:
+            - name: api-logs-storage
+              mountPath: /data
+
+          envFrom:
+            - secretRef:
+                name: smtp-credentials
+
+          # --- UPDATED HEALTH CHECK PATHS ---
+          # The health checks must now also include the /v1 prefix
+          readinessProbe:
+            httpGet:
+              path: /v1/health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /v1/health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+      imagePullSecrets:
+        - name: acr-secret

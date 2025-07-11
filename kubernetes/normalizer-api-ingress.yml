@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: normalizer-api-ingress
+  namespace: default
+  # --- ADD THIS ANNOTATION ---
+  # This tells NGINX to rewrite the URL before sending it to the pod.
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: api.snelapi.nl
+      http:
+        paths:
+          # --- UPDATE THE PATH ---
+          # This now matches /v1 and captures everything after it.
+          - path: /v1(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: normalizer-service
+                port:
+                  number: 80

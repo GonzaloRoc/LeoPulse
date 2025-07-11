@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: api-logs-pvc # The name we'll use to refer to this storage
+  namespace: default # Must be in the same namespace as the API pods
+spec:
+  accessModes:
+    - ReadWriteOnce # This means it can be mounted by multiple pods on a single node
+  # --- ADD THIS LINE ---
+  # Explicitly tell the PVC which StorageClass to use.
+  storageClassName: local-path
+
+  resources:
+    requests:
+      storage: 1Gi # Request 1 Gigabyte of storage for the logs database
