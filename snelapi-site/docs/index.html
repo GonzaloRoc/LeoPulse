@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnelAPI Documentatie</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="https://www.snelapi.nl">
+            <img src="https://www.snelapi.nl/images/nl-flag.png" alt="NL" style="height:20px;margin-right:8px;border-radius:3px;">
+            SnelAPI
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://www.snelapi.nl">Home</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://docs.snelapi.nl" target="_blank">Documentatie</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://explorer.snelapi.nl" target="_blank">API Explorer</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://www.snelapi.nl#contact">Contact</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://portal.snelapi.nl" target="_blank">Login</a></li>
+          </div>
+    </div>
+</nav>
+
+    <div class="docs-container">
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <h2>SnelAPI Docs</h2>
+            </header>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#introduction" class="active">Introductie</a></li>
+                    <li><a href="#authentication">Authenticatie</a></li>
+                    <li><a href="#endpoints">Endpoints</a></li>
+                    <li><a href="#errors">Foutcodes</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section id="introduction">
+                <h1>Introductie</h1>
+                <p>Welkom bij de officiële documentatie voor SnelAPI. Deze gids biedt alle informatie die u nodig heeft om te beginnen met het maken van requests naar onze API-endpoints.</p>
+            </section>
+            <section id="authentication">
+                <h2>Authenticatie</h2>
+                <p>SnelAPI gebruikt API Keys om requests te authenticeren. U kunt uw API-sleutels bekijken en beheren in de <a href="https://portal.snelapi.nl">SnelAPI Portal</a>.</p>
+                <p>Voeg uw API-sleutel als volgt toe aan de request header:</p>
+                <pre><code>Authorization: Bearer UW_API_SLEUTEL</code></pre>
+            </section>
+            <section id="endpoints">
+                <h2>Endpoints</h2>
+                <p>Dit gedeelte beschrijft de beschikbare API-endpoints, inclusief de vereiste parameters en voorbeeldantwoorden.</p>
+                <h3>GET /resource</h3>
+                <p>Haalt een lijst met resources op.</p>
+                <pre><code>curl -X GET "https://api.snelapi.nl/v1/resource" \
+-H "Authorization: Bearer UW_API_SLEUTEL"</code></pre>
+            </section>
+            <section id="errors">
+                <h2>Foutcodes</h2>
+                <p>De API gebruikt conventionele HTTP-statuscodes om het succes of falen van een request aan te geven.</p>
+                <ul>
+                    <li><strong>200 OK</strong> - Het request was succesvol.</li>
+                    <li><strong>401 Unauthorized</strong> - Uw API-sleutel is onjuist of ontbreekt.</li>
+                    <li><strong>404 Not Found</strong> - De opgevraagde resource bestaat niet.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>

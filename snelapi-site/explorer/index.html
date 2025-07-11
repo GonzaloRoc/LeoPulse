@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Explorer | SnelAPI</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_io/favicon-32x32.png">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <!-- Link to the new custom stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Original styles for cards and response areas are kept here */
+    body { background-color: #f8f9fa; }
+    .api-card { margin-bottom: 1.5rem; }
+    .response-area {
+      background-color: #282c34;
+      color: #abb2bf;
+      border-radius: 5px;
+      padding: 1rem;
+      min-height: 100px;
+      white-space: pre-wrap;
+      font-family: 'Courier New', Courier, monospace;
+      border: 1px solid #dee2e6;
+    }
+    .response-area.success { border-left: 5px solid #198754; }
+    .response-area.error { border-left: 5px solid #dc3545; }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="https://www.snelapi.nl">
+            <img src="https://www.snelapi.nl/images/nl-flag.png" alt="NL" style="height:20px;margin-right:8px;border-radius:3px;">
+            SnelAPI
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://www.snelapi.nl">Home</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://docs.snelapi.nl" target="_blank">Documentatie</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://explorer.snelapi.nl" target="_blank">API Explorer</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://www.snelapi.nl#contact">Contact</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://portal.snelapi.nl" target="_blank">Login</a></li>
+          </div>
+    </div>
+</nav>
+
+  <!-- New Two-Column Layout Container -->
+  <div class="docs-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <h5>Endpoints</h5>
+      <ul class="sidebar-nav">
+        <li><a href="#iban-validator">IBAN Validator</a></li>
+        <li><a href="#kvk-validator">KvK Validator</a></li>
+        <li><a href="#anomaly-detector">Anomaly Detector</a></li>
+        <li><a href="#add-metrics">Add Metrics</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">API Explorer</h1>
+        <p class="lead text-muted">Test onze live API-endpoints rechtstreeks vanuit uw browser.</p>
+      </div>
+
+      <!-- IBAN Validation Card -->
+      <div class="card api-card" id="iban-validator">
+        <div class="card-header">
+          <strong>GET</strong> `/iban/validate`
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">IBAN Validator</h5>
+          <p class="card-text">Voer een IBAN in om het formaat en de juistheid te valideren.</p>
+          <div class="mb-3">
+            <label for="iban-input" class="form-label">IBAN Code</label>
+            <input type="text" class="form-control" id="iban-input" placeholder="bv., NL91ABNA0417164300">
+          </div>
+          <button id="btn-validate-iban" class="btn btn-primary">Test Endpoint</button>
+          <h6 class="mt-4">Response:</h6>
+          <pre id="iban-response" class="response-area"><code>Klik op 'Test Endpoint' om het resultaat te zien.</code></pre>
+        </div>
+      </div>
+
+      <!-- KvK Validation Card -->
+      <div class="card api-card" id="kvk-validator">
+        <div class="card-header">
+          <strong>GET</strong> `/kvk/validate`
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">KvK Validator</h5>
+          <p class="card-text">Voer een Nederlands KvK-nummer (8 cijfers) in om het formaat te valideren.</p>
+          <div class="mb-3">
+            <label for="kvk-input" class="form-label">KvK-nummer</label>
+            <input type="text" class="form-control" id="kvk-input" placeholder="bv., 12345678">
+          </div>
+          <button id="btn-validate-kvk" class="btn btn-primary">Test Endpoint</button>
+          <h6 class="mt-4">Response:</h6>
+          <pre id="kvk-response" class="response-area"><code>Klik op 'Test Endpoint' om het resultaat te zien.</code></pre>
+        </div>
+      </div>
+
+      <!-- Anomaly Detection Card -->
+      <div class="card api-card" id="anomaly-detector">
+        <div class="card-header">
+          <strong>POST</strong> `/anomaly/detect`
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Anomalie Detector</h5>
+          <p class="card-text">Voer een komma-gescheiden lijst met getallen in om uitschieters te vinden.</p>
+          <div class="mb-3">
+            <label for="anomaly-input" class="form-label">Data Waarden</label>
+            <textarea class="form-control" id="anomaly-input" rows="3" placeholder="bv., 20, 22, 21, 25, 100, 23, 19, -50, 24"></textarea>
+          </div>
+          <button id="btn-detect-anomaly" class="btn btn-primary">Test Endpoint</button>
+          <h6 class="mt-4">Response:</h6>
+          <pre id="anomaly-response" class="response-area"><code>Klik op 'Test Endpoint' om het resultaat te zien.</code></pre>
+        </div>
+      </div>
+
+      <!-- Add Metrics Card -->
+      <div class="card api-card" id="add-metrics">
+        <div class="card-header">
+          <strong>POST</strong> `/normalizer/addmetrics`
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Metrieken Optellen</h5>
+          <p class="card-text">Voer twee getallen in om hun som te krijgen.</p>
+          <div class="row">
+              <div class="col">
+                  <label for="value1-input" class="form-label">Waarde 1</label>
+                  <input type="number" class="form-control" id="value1-input" placeholder="bv., 10.5">
+              </div>
+              <div class="col">
+                  <label for="value2-input" class="form-label">Waarde 2</label>
+                  <input type="number" class="form-control" id="value2-input" placeholder="bv., 20.2">
+              </div>
+          </div>
+          <button id="btn-add-metrics" class="btn btn-primary mt-3">Test Endpoint</button>
+          <h6 class="mt-4">Response:</h6>
+          <pre id="add-metrics-response" class="response-area"><code>Klik op 'Test Endpoint' om het resultaat te zien.</code></pre>
+        </div>
+      </div>
+
+    </main>
+  </div>
+  
+  <script src="js/main.js"></script>
+</body>
+</html>

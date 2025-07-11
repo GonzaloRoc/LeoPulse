@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SnelAPI | Snelle, veilige AI API's in Nederland | GDPR-proof</title>
+  <meta name="description" content="SnelAPI biedt razendsnelle, privacygerichte AI API's volledig gehost in Nederland. Ideaal voor LLM, computer vision en industriële toepassingen.">
+  <meta name="keywords" content="SnelAPI, GDPR AI API, Nederlandse API, FastAPI, LLM API, AI in Europa, privacyvriendelijke API, edge AI, computer vision">
+  <meta name="author" content="LeoPulse B.V.">
+  <link rel="canonical" href="https://snelapi.nl/" />
+
+  <!-- Social / Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SnelAPI | Veilige, snelle AI API's in Nederland">
+  <meta property="og:description" content="GDPR-compliant AI API’s gehost in Nederland. Perfect voor toepassingen met lage latency en privacy-eisen.">
+  <meta property="og:image" content="https://snelapi.nl/images/hero-bg.png">
+  <meta property="og:url" content="https://snelapi.nl/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Performance: preconnect / DNS prefetch -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+
+  <!-- Favicons… -->
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon_io/favicon-32x32.png">
+  <link rel="manifest" href="images/favicon_io/site.webmanifest">
+
+  <!-- Bootstrap & custom CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Structured Data: Organization, WebSite, Breadcrumb, FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "LeoPulse B.V.",
+        "url": "https://snelapi.nl",
+        "logo": "https://snelapi.nl/images/favicon_io/favicon-32x32.png",
+        "sameAs": ["https://linkedin.com/company/leopulse"]
+      },
+      {
+        "@type": "WebSite",
+        "url": "https://snelapi.nl",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://snelapi.nl/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://snelapi.nl/"},
+          {"@type":"ListItem","position":2,"name":"Prijzen","item":"https://snelapi.nl#pricing"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"Hoe snel is de API?",
+            "acceptedAnswer":{"@type":"Answer","text":"Onze endpoints reageren binnen 50–100 ms vanuit Europa."}
+          },
+          {
+            "@type":"Question",
+            "name":"Is er een SLA?",
+            "acceptedAnswer":{"@type":"Answer","text":"Wij garanderen 99,9 % uptime en 24/7 support voor Enterprise-klanten."}
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Cookie Consent -->
+  <div id="cookie-consent" class="bg-dark text-white text-center py-2" style="display:none;">
+    Deze site gebruikt cookies om de ervaring te verbeteren. <a href="/privacy" class="text-warning">Lees meer</a>
+    <button id="btn-accept" class="btn btn-sm btn-warning ms-2">Accepteren</button>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <div class="container">
+          <a class="navbar-brand d-flex align-items-center" href="https://www.snelapi.nl">
+              <img src="https://www.snelapi.nl/images/nl-flag.png" alt="NL" style="height:20px;margin-right:8px;border-radius:3px;">
+              SnelAPI
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://www.snelapi.nl">Home</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://docs.snelapi.nl" target="_blank">Documentatie</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://explorer.snelapi.nl" target="_blank">API Explorer</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://www.snelapi.nl#contact">Contact</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-warning ms-2 px-3 py-2" href="https://portal.snelapi.nl" target="_blank">Login</a></li>
+          </div>
+      </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home" class="text-white text-center d-flex align-items-center justify-content-center" style="background:url('images/hero-bg.png')center/cover no-repeat;min-height:450px;">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Snelle, veilige AI API's in Nederland</h1>
+      <p class="lead mb-4">Volledig GDPR-proof en gehost op edge-infrastructuur voor minimale latency.</p>
+      <a href="#pricing" class="btn btn-primary btn-lg me-2">Bekijk Prijzen</a>
+      <a href="#docs" class="btn btn-outline-light btn-lg">Lees Documentatie</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Features -->
+    <section id="features" class="py-5">
+      <div class="container">
+        <div class="row text-center mb-4">
+          <h2>Waarom SnelAPI?</h2>
+          <p class="text-muted">Ontworpen voor ontwikkelaars en bedrijven die niets minder dan het beste willen.</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-3 text-center">
+            <img src="images/icon-speed.png" alt="Snel" class="mb-2" width="48">
+            <h5>Snel & Betrouwbaar</h5>
+            <p>50–100 ms responstijd in Europa, met 99,9 % uptime SLA.</p>
+          </div>
+          <div class="col-md-3 text-center">
+            <img src="images/icon-lock.png" alt="Beveiligd" class="mb-2" width="48">
+            <h5>GDPR-Compliant</h5>
+            <p>Data verwerkt in Nederland, geen derde partijen.</p>
+          </div>
+          <div class="col-md-3 text-center">
+            <img src="images/icon-scale.png" alt="Schaalbaar" class="mb-2" width="48">
+            <h5>Auto-schaalbaar</h5>
+            <p>Ondersteunt piekverkeer zonder downtime.</p>
+          </div>
+          <div class="col-md-3 text-center">
+            <img src="images/icon-support.png" alt="Support" class="mb-2" width="48">
+            <h5>24/7 Ondersteuning</h5>
+            <p>Dedicated support voor enterprise-klanten.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="bg-light py-5">
+      <div class="container">
+        <div class="text-center mb-4">
+          <h2>Onze Prijzen</h2>
+          <p class="text-muted">Kies het plan dat bij jouw gebruik past.</p>
+        </div>
+        <div class="row g-4">
+          <!-- Starter -->
+          <div class="col-md-4">
+            <div class="card h-100 border-primary">
+              <div class="card-header text-center bg-primary text-white">
+                <h3>Starter</h3>
+                <p class="h1 mb-0">€0<span class="fs-6">/maand</span></p>
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li>Max. 10.000 calls/maand</li>
+                  <li>Geen SLA</li>
+                  <li>Community support</li>
+                </ul>
+              </div>
+              <div class="card-footer text-center">
+                <a href="/signup?plan=starter" class="btn btn-primary">Aanmelden</a>
+              </div>
+            </div>
+          </div>
+          <!-- Growth -->
+          <div class="col-md-4">
+            <div class="card h-100 border-success">
+              <div class="card-header text-center bg-success text-white">
+                <h3>Growth</h3>
+                <p class="h1 mb-0">€99<span class="fs-6">/maand</span></p>
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li>100.000 calls/maand</li>
+                  <li>99,9 % uptime SLA</li>
+                  <li>Email & Chat support</li>
+                </ul>
+              </div>
+              <div class="card-footer text-center">
+                <a href="/signup?plan=growth" class="btn btn-success">Start Free Trial</a>
+              </div>
+            </div>
+          </div>
+          <!-- Enterprise -->
+          <div class="col-md-4">
+            <div class="card h-100 border-dark">
+              <div class="card-header text-center bg-dark text-white">
+                <h3>Enterprise</h3>
+                <p class="h1 mb-0">Op maat</p>
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li>Onbeperkt verkeer</li>
+                  <li>Dedicated SLA & Support</li>
+                  <li>Contract & NDA</li>
+                </ul>
+              </div>
+              <div class="card-footer text-center">
+                <a href="#contact" class="btn btn-dark">Neem contact op</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <!-- Explore APIs call to action -->
+ <section id="explore-api" class="py-5 text-center text-white" style="background-image: linear-gradient(to right, #0d6efd, #6610f2);">
+    <div class="container">
+        <h2 class="display-5 fw-bold">Klaar om te beginnen?</h2>
+        <p class="lead mb-4">Duik in onze documentatie of test de endpoints direct in de API Explorer.</p>
+        <a href="https://docs.snelapi.nl" target="_blank" class="btn btn-light btn-lg me-2">Lees de Docs</a>
+        <a href="https://explorer.snelapi.nl" target="_blank" class="btn btn-outline-light btn-lg">Open Explorer</a>
+    </div>
+</section>
+
+    <!-- trust-section -->
+<section id="trust-section" class="py-5">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2>Gebouwd voor Vertrouwen en Prestaties</h2>
+            <p class="text-muted">Transparantie en moderne technologie vormen de kern van onze service.</p>
+        </div>
+        <div class="row g-4 text-center">
+            <!-- Column 1: Live Status -->
+            <div class="col-md-4">
+                <img src="images/icon-status.png" alt="Status" class="mb-2" width="48">
+                <h5>Live Status Pagina</h5>
+                <p>Wij geloven in volledige transparantie. Volg onze uptime en responstijden in real-time via onze openbare statuspagina.</p>
+                <a href="https://status.snelapi.nl" target="_blank" class="btn btn-outline-secondary btn-sm">Bekijk Live Status</a>
+            </div>
+
+            <!-- Column 2: Modern Technology -->
+            <div class="col-md-4">
+                <img src="images/icon-tech.png" alt="Technologie" class="mb-2" width="48">
+                <h5>Moderne Technologie</h5>
+                <p>Gebouwd op een robuuste en schaalbare stack met Python, FastAPI en Kubernetes om maximale prestaties te garanderen.</p>
+            </div>
+
+            <!-- Column 3: European & GDPR -->
+            <div class="col-md-4">
+                <img src="images/icon-privacy.png" alt="Privacy" class="mb-2" width="48">
+                <h5>100% Europees & GDPR-Proof</h5>
+                <p>Uw data verlaat Nederland nooit. Onze infrastructuur is ontworpen met privacy als hoogste prioriteit.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact & Contract Form -->
+<section id="contact" class="bg-light py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- LEFT SIDE: prompt text -->
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h2>Heeft u vragen?</h2>
+        <p class="lead">
+          Bent u een ontwikkelaar en wilt u uw API’s hosten op ons platform?  
+          Ontdek hoe onze GDPR-proof edge-infrastructuur uw latency minimaliseert én uw data veilig houdt in Nederland.
+        </p>
+        <ul class="list-unstyled">
+          <li>✔️ Razendsnelle responstijden (50–100 ms)</li>
+          <li>✔️ 99,9 % SLA en 24/7 support</li>
+          <li>✔️ Volledig gehost binnen de EU</li>
+        </ul>
+        <p>Upload uw contract of NDA direct, wij nemen binnen 24 uur contact met u op!</p>
+      </div>
+
+      <!-- RIGHT SIDE: contact form -->
+      <div class="col-lg-6">
+        <form id="contact-form" method="POST" enctype="multipart/form-data" class="row g-3">
+          <div class="col-md-6">
+            <label for="name" class="form-label">Naam</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+          <div class="col-md-6">
+            <label for="company" class="form-label">Bedrijf</label>
+            <input type="text" class="form-control" id="company" name="company">
+          </div>
+          <div class="col-md-6">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="col-md-6">
+            <label for="phone" class="form-label">Telefoon</label>
+            <input type="tel" class="form-control" id="phone" name="phone">
+          </div>
+          <div class="col-12">
+            <label for="message" class="form-label">Bericht</label>
+            <textarea class="form-control" id="message" name="message" rows="4"></textarea>
+          </div>
+          <div class="col-md-6">
+            <label for="plan" class="form-label">Interesse in plan</label>
+            <select class="form-select" id="plan" name="plan">
+              <option value="starter">Starter</option>
+              <option value="growth">Growth</option>
+              <option value="enterprise">Enterprise</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="contract" class="form-label">Upload NDA/Contract (optioneel)</label>
+            <input class="form-control" type="file" id="contract" name="contract">
+          </div>
+          <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary">Verstuur</button>
+          </div>
+          <div id="form-status" class="col-12 mt-3 text-center"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4">
+    <div class="container text-center">
+      <div class="mb-3">
+        <a href="/" class="text-white me-3">Home</a>
+        <a href="/privacy" class="text-white me-3">Privacybeleid</a>
+        <a href="/terms" class="text-white me-3">Algemene Voorwaarden</a>
+        <a href="/sitemap.xml" class="text-white">Sitemap</a>
+      </div>
+      <div class="mb-2">
+        <a href="https://linkedin.com/company/leopulse" class="text-white me-2">LinkedIn</a>
+      </div>
+      <small>© <span id="year"></span> LeoPulse B.V. Alle rechten voorbehouden</small>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS & deferred scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  
+  <!-- Existing Scripts -->
+  <script>
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Cookie consent
+    document.addEventListener('DOMContentLoaded', () => {
+      if(!localStorage.getItem('cookiesAccepted')){
+        document.getElementById('cookie-consent').style.display = 'block';
+        document.getElementById('btn-accept').onclick = () => {
+          localStorage.setItem('cookiesAccepted','yes');
+          document.getElementById('cookie-consent').style.display = 'none';
+        };
+      }
+    });
+  </script>
+
+  <!-- CONTACT FORM -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const contactForm = document.getElementById('contact-form');
+      const formStatus = document.getElementById('form-status');
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+          e.preventDefault(); // Stop the default browser submission
+
+          const submitButton = contactForm.querySelector('button[type="submit"]');
+          const originalButtonText = submitButton.textContent;
+
+          submitButton.disabled = true;
+          submitButton.textContent = 'Versturen...';
+          formStatus.textContent = '';
+          formStatus.className = 'mt-3 text-center';
+
+          const formData = new FormData(contactForm);
+        
+          const apiUrl = 'https://api.snelapi.nl/contact';
+
+          try {
+            const response = await fetch(apiUrl, {
+              method: 'POST',
+              body: formData,
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+              formStatus.textContent = 'Bedankt! Uw bericht is verzonden.';
+              formStatus.classList.add('text-success');
+              contactForm.reset();
+            } else {
+              formStatus.textContent = `Er is een fout opgetreden: ${result.detail || 'Probeer het later opnieuw.'}`;
+              formStatus.classList.add('text-danger');
+            }
+          } catch (error) {
+            formStatus.textContent = 'Netwerkfout. Controleer uw verbinding en probeer het opnieuw.';
+            formStatus.classList.add('text-danger');
+          } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+          }
+        });
+      }
+    });
+  </script>
+
+  <!-- Google Analytics (example) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXX-X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-XXXXXX-X');
+  </script>
+</body>
+</html>

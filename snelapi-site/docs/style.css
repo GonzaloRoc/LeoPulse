@@ -1,0 +1,138 @@
+/* --- Corrected CSS for Docs Page --- */
+
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --sidebar-bg: #f7f7f7;
+    --border-color: #e0e0e0;
+    --link-color: #007bff;
+    --code-bg: #2d2d2d;
+    --code-text: #f8f8f2;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1071;
+}
+
+.docs-container {
+    display: flex;
+}
+
+/* --- Sidebar Styling (FIXED) --- */
+.sidebar {
+    width: 260px;
+    height: calc(100vh - 56px); /* Adjusted height to account for navbar */
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    position: fixed;
+    top: 56px; /* Pushed down below the 56px navbar */
+    left: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sidebar-header h2 {
+    margin: 0 0 20px 0;
+    font-size: 1.5em;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li a.active {
+    background-color: #e9ecef;
+    font-weight: 500;
+}
+
+/* Main Content Styling */
+.main-content {
+    margin-left: 260px; /* Same as sidebar width */
+    padding: 40px;
+    width: calc(100% - 260px);
+}
+
+section {
+    margin-bottom: 60px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 40px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+a {
+    color: var(--link-color);
+}
+
+/* --- Code Block Styling (FIXED) --- */
+pre {
+    position: relative; /* This is the positioning context for the button */
+    background-color: var(--code-bg);
+    color: var(--code-text);
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.copy-button {
+    position: absolute; /* Positions the button relative to the <pre> tag */
+    top: 10px;
+    right: 10px;
+    padding: 6px 10px;
+    background-color: #4a5568;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: inherit;
+    opacity: 0.7;
+    transition: opacity 0.2s, background-color 0.2s;
+}
+
+pre:hover .copy-button {
+    opacity: 1;
+}
+
+.copy-button:hover {
+    background-color: #2d3748;
+}
+
+.copy-button.copied {
+    background-color: #2f855a;
+}
